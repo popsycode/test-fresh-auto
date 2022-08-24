@@ -33,7 +33,7 @@ dump(sprintf('XmlReaderWriterConverter Time: %s s.', $time));
 
 $start = microtime(true);
 
-(new \App\SabreXmlFileConverter(
+(new \App\SabreConverter(
     $template,
     __DIR__ . '/xml/result_Sabre.xml'
 ))->convert();

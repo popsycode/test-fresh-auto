@@ -13,7 +13,7 @@ use Sabre\Xml\Writer;
  * @psalm-type TNode = array{name: string, attributes: array, value: mixed}
  */
 
-class SabreXmlFileConverter extends AbstractXmlFileConverter
+class SabreConverter extends AbstractXmlFileConverter
 {
     private Reader $reader;
     private Writer $writer;
@@ -28,7 +28,7 @@ class SabreXmlFileConverter extends AbstractXmlFileConverter
     /**
      * @throws LibXMLException
      */
-    public function convert(): SabreXmlFileConverter
+    public function convert(): SabreConverter
     {
         $this->reader->xml(file_get_contents($this->inputFilePath));
         /** @var TNode $content */
@@ -50,8 +50,13 @@ class SabreXmlFileConverter extends AbstractXmlFileConverter
     {
         $node['name'] = self::strrev($node['name']);
 
-        collect($node['attributes'])
-            ->each(fn($attribute) => self::strrev($attribute));
+        $attributes = collect($node['attributes']);
+        if($attributes->count()){
+            $node['attributes'] = [];
+            foreach ($attributes as $name => $value){
+                $node['attributes'][self::strrev($name)] = self::strrev($value);
+            }
+        }
 
         $node['value'] = match (gettype($node['value'])) {
             'array' => collect((array) $node['value'])
