@@ -1,0 +1,32 @@
+{
+  "name": "popsycode/test-fresh-auto",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "POPsy",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php": "^8.1.0",
+    "sabre/xml": "^3.0.0",
+    "illuminate/collections": "^9.26",
+    "ext-xmlwriter": "*",
+    "ext-xmlreader": "*",
+    "hakre/xmlreaderiterator": "^0.1.12"
+  },
+  "require-dev": {
+    "vimeo/psalm": "^4.26.0",
+    "symfony/var-dumper": "^6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "scripts": {
+    "psalm": "vendor/bin/psalm --no-cache --config=psalm.xml"
+  }
+}
