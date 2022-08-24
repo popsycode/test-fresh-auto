@@ -15,8 +15,7 @@
     "hakre/xmlreaderiterator": "^0.1.12",
     "illuminate/collections": "^9.26",
     "ext-xmlwriter": "*",
-    "ext-xmlreader": "*",
-    "symfony/dom-crawler": "^6.1"
+    "ext-xmlreader": "*"
   },
   "require-dev": {
     "vimeo/psalm": "^4.26.0",
