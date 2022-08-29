@@ -50,18 +50,15 @@ class SabreConverter extends AbstractXmlFileConverter
     {
         $node['name'] = self::strrev($node['name']);
 
-        $attributes = collect($node['attributes']);
-        if($attributes->count()){
+        if(count($node['attributes'])){
             $node['attributes'] = [];
-            foreach ($attributes as $name => $value){
+            foreach ($node['attributes'] as $name => $value){
                 $node['attributes'][self::strrev($name)] = self::strrev($value);
             }
         }
 
         $node['value'] = match (gettype($node['value'])) {
-            'array' => collect((array) $node['value'])
-                ->map(fn($childNode) => self::transformNode($childNode))
-                ->toArray(),
+            'array' => array_map(fn($childNode) => self::transformNode($childNode), (array) $node['value']),
             default => self::strrev(strval($node['value']))
         };
 
